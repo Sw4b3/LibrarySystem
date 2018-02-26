@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package librarysystem;
+package librarysystem.controller;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UnsupportedLookAndFeelException;
+import librarysystem.form.MainForm;
 
 /**
  *
@@ -27,18 +28,12 @@ public class LibrarySystem {
                 }
             }
         } catch (ClassNotFoundException ex) {
-                  } catch (InstantiationException ex) {
-            Logger.getLogger(LibrarySystem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(LibrarySystem.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
+                  } catch (InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(LibrarySystem.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainForm().setVisible(true);
-            }
+         java.awt.EventQueue.invokeLater(() -> {
+             new MainForm().setVisible(true);
         });
     }
 }

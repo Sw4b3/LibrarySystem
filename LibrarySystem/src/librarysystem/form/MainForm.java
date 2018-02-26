@@ -1,13 +1,40 @@
-package librarysystem;
+package librarysystem.form;
+
+import javax.swing.table.DefaultTableModel;
+import librarysystem.controller.DatabaseManager;
+
 /**
  *
  * @author Andrew
  */
 public class MainForm extends javax.swing.JFrame {
 
+    DatabaseManager manager=new DatabaseManager();
+    
     public MainForm() {
         initComponents();
         setLocationRelativeTo(null);
+      populateBooking();
+      populateBooks();
+      populateCustomer();
+    }
+    
+      public final void populateBooking() {
+        String columnNamesInventory[] = {"Ref", "ISBN", "Customer ID", "Staff ID", "Booking Date", "Return Date"};
+        DefaultTableModel tableModel = new DefaultTableModel(manager.getBooking(), columnNamesInventory);
+        bookingTable.setModel(tableModel);
+    }
+      
+       public final void populateBooks() {
+        String columnNamesInventory[] = {"ISBN", "Title", "Author", "Year", "Edition", "Category","Publisher","Copies"};
+        DefaultTableModel tableModel = new DefaultTableModel(manager.getBooks(), columnNamesInventory);
+        bookTable.setModel(tableModel);
+    }
+       
+        public final void populateCustomer() {
+        String columnNamesInventory[] = {"Customer ID", "Title", "First Name", "Last Name ", "Phone", "Address"};
+        DefaultTableModel tableModel = new DefaultTableModel(manager.getCustomer(), columnNamesInventory);
+        customerTable.setModel(tableModel);
     }
 
     @SuppressWarnings("unchecked")
@@ -21,7 +48,7 @@ public class MainForm extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        bookingTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
@@ -30,14 +57,14 @@ public class MainForm extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        bookTable = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        customerTable = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
@@ -60,7 +87,11 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/librarysystem/files-512.png"))); // NOI18N
 
+        jButton12.setBackground(new java.awt.Color(53, 53, 53));
+        jButton12.setForeground(java.awt.Color.white);
         jButton12.setText("Close");
+        jButton12.setContentAreaFilled(false);
+        jButton12.setOpaque(true);
         jButton12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
@@ -101,7 +132,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jPanel2.setBackground(java.awt.Color.white);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bookingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -112,11 +143,20 @@ public class MainForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        bookingTable.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(bookingTable);
 
+        jButton1.setBackground(new java.awt.Color(53, 53, 53));
+        jButton1.setForeground(java.awt.Color.white);
         jButton1.setText("Reserve Book");
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(true);
 
+        jButton2.setBackground(new java.awt.Color(53, 53, 53));
+        jButton2.setForeground(java.awt.Color.white);
         jButton2.setText("Return Book");
+        jButton2.setContentAreaFilled(false);
+        jButton2.setOpaque(true);
 
         jLabel7.setText("Search");
 
@@ -135,12 +175,12 @@ public class MainForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(254, 254, 254)
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addGap(235, 235, 235))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +191,7 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -162,11 +202,19 @@ public class MainForm extends javax.swing.JFrame {
 
         jPanel3.setBackground(java.awt.Color.white);
 
+        jButton7.setBackground(new java.awt.Color(53, 53, 53));
+        jButton7.setForeground(java.awt.Color.white);
         jButton7.setText("Add Book ");
+        jButton7.setContentAreaFilled(false);
+        jButton7.setOpaque(true);
 
+        jButton8.setBackground(new java.awt.Color(53, 53, 53));
+        jButton8.setForeground(java.awt.Color.white);
         jButton8.setText("Update Book");
+        jButton8.setContentAreaFilled(false);
+        jButton8.setOpaque(true);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        bookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -177,7 +225,8 @@ public class MainForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        bookTable.setShowVerticalLines(false);
+        jScrollPane4.setViewportView(bookTable);
 
         jLabel8.setText("Search");
 
@@ -196,12 +245,12 @@ public class MainForm extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(256, 256, 256)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
-                .addGap(235, 235, 235))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,11 +272,19 @@ public class MainForm extends javax.swing.JFrame {
 
         jPanel4.setBackground(java.awt.Color.white);
 
+        jButton9.setBackground(new java.awt.Color(53, 53, 53));
+        jButton9.setForeground(java.awt.Color.white);
         jButton9.setText("Add Customer");
+        jButton9.setContentAreaFilled(false);
+        jButton9.setOpaque(true);
 
+        jButton13.setBackground(new java.awt.Color(53, 53, 53));
+        jButton13.setForeground(java.awt.Color.white);
         jButton13.setText("Update Customer");
+        jButton13.setContentAreaFilled(false);
+        jButton13.setOpaque(true);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -238,7 +295,8 @@ public class MainForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        customerTable.setShowVerticalLines(false);
+        jScrollPane5.setViewportView(customerTable);
 
         jLabel9.setText("Search");
 
@@ -285,9 +343,17 @@ public class MainForm extends javax.swing.JFrame {
         jPanel6.setBackground(java.awt.Color.white);
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jButton10.setBackground(new java.awt.Color(53, 53, 53));
+        jButton10.setForeground(java.awt.Color.white);
         jButton10.setText("Backup");
+        jButton10.setContentAreaFilled(false);
+        jButton10.setOpaque(true);
 
+        jButton11.setBackground(new java.awt.Color(53, 53, 53));
+        jButton11.setForeground(java.awt.Color.white);
         jButton11.setText("Restore");
+        jButton11.setContentAreaFilled(false);
+        jButton11.setOpaque(true);
 
         jLabel3.setText("Backup Database");
 
@@ -371,6 +437,9 @@ public class MainForm extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable bookTable;
+    private javax.swing.JTable bookingTable;
+    private javax.swing.JTable customerTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -398,9 +467,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
