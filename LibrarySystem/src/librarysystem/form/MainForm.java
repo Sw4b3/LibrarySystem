@@ -1,5 +1,6 @@
 package librarysystem.form;
 
+import java.awt.Toolkit;
 import librarysystem.UserController;
 import javax.swing.table.DefaultTableModel;
 import librarysystem.controller.DatabaseManager;
@@ -10,36 +11,46 @@ import librarysystem.controller.DatabaseManager;
  */
 public class MainForm extends javax.swing.JFrame {
 
-    DatabaseManager manager=new DatabaseManager();
-    UserController controller=new UserController();
-    InsetForm  insertForm;
-    UpdateForm  updateForm;
-    
+    DatabaseManager manager = new DatabaseManager();
+    UserController controller = new UserController();
+    InsetForm insertForm;
+    UpdateForm updateForm;
+
     public MainForm() {
         initComponents();
         setLocationRelativeTo(null);
-      populateBooking();
-      populateBooks();
-      populateCustomer();
+        populateBooking();
+        populateBooks();
+        populateCustomer();
+      //  fullscreen();
     }
     
-      public final void populateBooking() {
+        public void fullscreen() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xSize = ((int) tk.getScreenSize().getWidth());
+        int ySize = ((int) tk.getScreenSize().getHeight());
+        this.setSize(xSize, ySize);
+        this.setLocation(0, 0);
+    }
+
+    public final void populateBooking() {
         String columnNamesInventory[] = {"Ref", "ISBN", "Customer ID", "Staff ID", "Booking Date", "Return Date"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getBooking(), columnNamesInventory);
         bookingTable.setModel(tableModel);
     }
-      
-       public final void populateBooks() {
-        String columnNamesInventory[] = {"ISBN", "Title", "Author", "Year", "Edition", "Category","Publisher","Copies"};
+
+    public final void populateBooks() {
+        String columnNamesInventory[] = {"ISBN", "Title", "Author", "Year", "Edition", "Category", "Publisher", "Copies"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getBooks(), columnNamesInventory);
         bookTable.setModel(tableModel);
     }
-       
-        public final void populateCustomer() {
+
+    public final void populateCustomer() {
         String columnNamesInventory[] = {"Customer ID", "Title", "First Name", "Last Name ", "Phone", "Address"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getCustomer(), columnNamesInventory);
         customerTable.setModel(tableModel);
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -408,12 +419,22 @@ public class MainForm extends javax.swing.JFrame {
         jButton10.setText("Backup");
         jButton10.setContentAreaFilled(false);
         jButton10.setOpaque(true);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jButton11.setBackground(new java.awt.Color(53, 53, 53));
         jButton11.setForeground(java.awt.Color.white);
         jButton11.setText("Restore");
         jButton11.setContentAreaFilled(false);
         jButton11.setOpaque(true);
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Backup Database");
 
@@ -492,7 +513,7 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
@@ -500,24 +521,32 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-       controller.createLogginDialog();
+        controller.createLogginDialog();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       insertForm=new InsetForm();
+        insertForm = new InsetForm(this);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-     insertForm=new InsetForm();
+        insertForm = new InsetForm(this);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-      updateForm=new UpdateForm();
+        updateForm = new UpdateForm();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-       updateForm=new UpdateForm();
+        updateForm = new UpdateForm();
     }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        manager.backup();
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        manager.restore();
+    }//GEN-LAST:event_jButton11ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
