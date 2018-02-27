@@ -27,7 +27,7 @@ public class DatabaseManager {
         Object[][] rowData = null;
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             Class.forName(driver).newInstance();
-            String query = "SELECT * FROM bookreserve ";
+            String query = "call getBooking";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -61,7 +61,7 @@ public class DatabaseManager {
         Object[][] rowData = null;
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             Class.forName(driver).newInstance();
-            String query = "SELECT * FROM book ";
+            String query = "call getBook";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -93,7 +93,7 @@ public class DatabaseManager {
         Object[][] rowData = null;
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             Class.forName(driver).newInstance();
-            String query = "SELECT * FROM customer ";
+            String query = "call getCustomer";
             ResultSet rs = s.executeQuery(query);
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
