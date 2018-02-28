@@ -9,6 +9,7 @@ import java.awt.HeadlessException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -50,7 +51,6 @@ public class DatabaseManager {
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
                 rowData[i][6] = rs.getObject(7);
-
                 i++;
             }
             rs.close();
@@ -84,6 +84,7 @@ public class DatabaseManager {
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
                 rowData[i][6] = rs.getObject(7);
+                rowData[i][7] = rs.getObject(8);
                 i++;
             }
             rs.close();
@@ -125,23 +126,40 @@ public class DatabaseManager {
     }
 
     public void insertCustomer(String title, String firstName, String lastName, String phone, String Address) {
-       try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
-            String insertQuery = "call insertCustomer('" + title + "', '"+ firstName + "','"+ lastName + "','"+ phone + "','"+ Address + "');";
-            s.execute(insertQuery);
-        } catch (SQLException exp) {
-            System.out.println(exp);
-        }
-    }
-    
-        public void insertBook(String ISBN, String title, String author, String year, String edition,String category,String publisher,String copies) {
-       try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
-            String insertQuery = "call insertBook('" + ISBN + "', '"+ title + "','"+ author + "','"+ year + "','"+ edition + "','"+ category + "','"+ publisher + "','"+ copies + "');";
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call insertCustomer('" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
         } catch (SQLException exp) {
             System.out.println(exp);
         }
     }
 
+    public void insertBook(String ISBN, String title, String author, String year, String edition, String category, String publisher, String copies) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call insertBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
+            s.execute(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+    
+     public void updateCustomer(String id, String title, String firstName, String lastName, String phone, String Address) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call updateCustomer('" + id + "','" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
+            s.execute(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void updateBook(String ISBN, String title, String author, String year, String edition, String category, String publisher, String copies) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call updateBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
+            s.execute(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
 
     public void backup() {
         try {

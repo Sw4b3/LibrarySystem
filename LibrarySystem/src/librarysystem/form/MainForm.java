@@ -22,10 +22,10 @@ public class MainForm extends javax.swing.JFrame {
         populateBooking();
         populateBooks();
         populateCustomer();
-      //  fullscreen();
+        //  fullscreen();
     }
-    
-        public void fullscreen() {
+
+    public void fullscreen() {
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().getWidth());
         int ySize = ((int) tk.getScreenSize().getHeight());
@@ -50,7 +50,23 @@ public class MainForm extends javax.swing.JFrame {
         DefaultTableModel tableModel = new DefaultTableModel(manager.getCustomer(), columnNamesInventory);
         customerTable.setModel(tableModel);
     }
-    
+
+    public String[] getCustomer() {
+        String customerInfo[] = new String[customerTable.getColumnCount()];
+        for (int i = 0; i < customerTable.getColumnCount(); i++) {
+            customerInfo[i] = customerTable.getValueAt(customerTable.getSelectedRow(), i).toString();
+        }
+        return customerInfo;
+    }
+
+    public String[] getBook() {
+        String bookInfo[] = new String[bookTable.getColumnCount()];
+        for (int i = 0; i < bookTable.getColumnCount(); i++) {
+            bookInfo[i] = bookTable.getValueAt(bookTable.getSelectedRow(), i).toString();
+            System.out.println(bookInfo[i]);
+        }
+        return bookInfo;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -533,11 +549,13 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        updateForm = new UpdateForm();
+        updateForm = new UpdateForm(this);
+        updateForm.setBookDetail(getBook());
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        updateForm = new UpdateForm();
+        updateForm = new UpdateForm(this);
+        updateForm.setCustomerDetail(getCustomer());
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
