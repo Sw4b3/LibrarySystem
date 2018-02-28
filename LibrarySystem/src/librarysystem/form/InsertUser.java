@@ -12,6 +12,7 @@ public class InsertUser extends javax.swing.JFrame {
   
     public InsertUser() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
     
       public String getUsername() {
@@ -47,6 +48,7 @@ public class InsertUser extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         customer.setBackground(java.awt.Color.white);
 

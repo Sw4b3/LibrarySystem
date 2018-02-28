@@ -49,7 +49,6 @@ public class DatabaseManager {
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
                 rowData[i][5] = rs.getObject(6);
-                rowData[i][6] = rs.getObject(7);
                 i++;
             }
             rs.close();
@@ -192,6 +191,15 @@ public class DatabaseManager {
     public void insertBook(String ISBN, String title, String author, String year, String edition, String category, String publisher, String copies) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call insertBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
+            s.execute(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+    
+     public void insertBookReserve(String ref, String isbn, String customerId, String StaffId, String bookingDate) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call insertBookReserve('" + ref + "', '" + isbn + "','" + customerId + "','" + StaffId + "','" + bookingDate + "');";
             s.execute(insertQuery);
         } catch (SQLException exp) {
             System.out.println(exp);

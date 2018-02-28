@@ -72,7 +72,7 @@ public class MainForm extends javax.swing.JFrame {
         loggedinUser.setText("Currently Logged in: " + user);
     }
 
-    public String getLoggedOut() {
+    public String getLoggedIn() {
         return loggedinUser.getText();
     }
 
@@ -235,6 +235,11 @@ public class MainForm extends javax.swing.JFrame {
         jButton1.setText("Reserve Book");
         jButton1.setContentAreaFilled(false);
         jButton1.setOpaque(true);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(53, 53, 53));
         jButton2.setForeground(java.awt.Color.white);
@@ -572,12 +577,12 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        manager.signOut(getLoggedOut());
+        manager.signOut(getLoggedIn());
         this.dispose();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        manager.signOut(getLoggedOut());
+        manager.signOut(getLoggedIn());
           JOptionPane.showMessageDialog(null, "Logged out");
         loggedinUser.setText("Currently Logged in: ");
     }//GEN-LAST:event_jButton14ActionPerformed
@@ -615,6 +620,10 @@ public class MainForm extends javax.swing.JFrame {
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         new InsertUser().setVisible(true);
     }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      new ReserveBook(this).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
