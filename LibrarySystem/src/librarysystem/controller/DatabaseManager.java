@@ -9,7 +9,6 @@ import java.awt.HeadlessException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -125,6 +124,62 @@ public class DatabaseManager {
         return rowData;
     }
 
+    public Object[][] getUser() {
+        Object[][] rowData = null;
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            Class.forName(driver).newInstance();
+            String query = "call getUser";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                i++;
+            }
+            rs.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
+            System.out.println("get customer method" + ex);
+        }
+        return rowData;
+    }
+
+    public void signIn(String userUsername, String userPassword) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call signIn('" + userUsername + "','" + userPassword + "');";
+            s.executeQuery(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+
+    }
+
+    public void signOut(String userUsername) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call signOut('" + userUsername + "');";
+            s.executeQuery(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+
+    }
+
+    public void insertUser(String userUsername, String firstName, String lastName, String userPassword) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call insertUser('" + userUsername + "', '" + firstName + "','" + lastName + "','" + userPassword + "');";
+            s.execute(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
     public void insertCustomer(String title, String firstName, String lastName, String phone, String Address) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call insertCustomer('" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
@@ -142,8 +197,8 @@ public class DatabaseManager {
             System.out.println(exp);
         }
     }
-    
-     public void updateCustomer(String id, String title, String firstName, String lastName, String phone, String Address) {
+
+    public void updateCustomer(String id, String title, String firstName, String lastName, String phone, String Address) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call updateCustomer('" + id + "','" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
