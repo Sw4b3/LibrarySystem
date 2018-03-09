@@ -166,7 +166,7 @@ public class InsertUser extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        manager.insertUser(getTitle(), getFirstName(), getLastName(), getPassword());
+        manager.insertUser(getUsername(), getFirstName(), getLastName(), getPassword());
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 

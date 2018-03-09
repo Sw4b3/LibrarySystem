@@ -9,6 +9,7 @@ import java.awt.HeadlessException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -119,6 +120,35 @@ public class DatabaseManager {
             rs.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get customer method" + ex);
+        }
+        return rowData;
+    }
+    
+     public Object[][] getStaff() {
+        Object[][] rowData = null;
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            Class.forName(driver).newInstance();
+            String query = "call getStaff";
+            ResultSet rs = s.executeQuery(query);
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            int rowCount = 0;
+            while (rs.next()) {
+                rowCount++;
+            }
+            rs = s.executeQuery(query);
+            rowData = new Object[rowCount][columnCount];
+            int i = 0;
+            while (rs.next()) {
+                rowData[i][0] = rs.getObject(1);
+                rowData[i][1] = rs.getObject(2);
+                rowData[i][2] = rs.getObject(3);
+                rowData[i][3] = rs.getObject(4);
+                i++;
+            }
+            rs.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
+            System.out.println("get staff method" + ex);
         }
         return rowData;
     }
@@ -240,6 +270,15 @@ public class DatabaseManager {
             JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
         }
     }
+    
+      public void returnBook(String ref, String returnDate) {
+       try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call returnBook('" + ref + "', '" + returnDate + "');";
+            s.execute(insertQuery);
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+      }
 
     public void restore() {
         try {

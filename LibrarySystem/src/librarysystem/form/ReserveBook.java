@@ -204,6 +204,7 @@ public class ReserveBook extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         manager.insertBookReserve(getRef(),getISBN(),getCustomerID(),getStaffID(),getBookingDate());
+        form.populateBooking();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
