@@ -761,7 +761,9 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new ReturnBook(this).setVisible(true);
+        manager.returnBook(bookingTable.getValueAt(bookingTable.getSelectedRow(),0).toString(), "02/00/00");
+        populateBooking();
+        //new ReturnBook(this).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

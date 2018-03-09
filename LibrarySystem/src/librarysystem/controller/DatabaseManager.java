@@ -5,6 +5,7 @@
  */
 package librarysystem.controller;
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.awt.HeadlessException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -123,8 +124,8 @@ public class DatabaseManager {
         }
         return rowData;
     }
-    
-     public Object[][] getStaff() {
+
+    public Object[][] getStaff() {
         Object[][] rowData = null;
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             Class.forName(driver).newInstance();
@@ -180,6 +181,60 @@ public class DatabaseManager {
         return rowData;
     }
 
+    public String convertMemberToID(String fname, String lname) {
+        String ID = "";
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            Class.forName(driver).newInstance();
+            String query = "call convertMemberToID('" + fname + "','" + lname + "');";
+            ResultSet rs = s.executeQuery(query);
+            int i = 0;
+            while (rs.next()) {
+                ID = rs.getString(1);
+                i++;
+            }
+            rs.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
+            System.out.println("get customer method" + ex);
+        }
+        return ID;
+    }
+
+    public String convertStaffToID(String fname, String lname) {
+        String ID = "";
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            Class.forName(driver).newInstance();
+            String query = "call convertStaffToID('" + fname + "','" + lname + "');";
+            ResultSet rs = s.executeQuery(query);
+            int i = 0;
+            while (rs.next()) {
+                ID = rs.getString(1);
+                i++;
+            }
+            rs.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
+            System.out.println("get customer method" + ex);
+        }
+        return ID;
+    }
+
+    public String convertBookToID(String fname, String lname) {
+        String ID = "";
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            Class.forName(driver).newInstance();
+            String query = "call convertBookToID('" + fname + "','" + lname + "');";
+            ResultSet rs = s.executeQuery(query);
+            int i = 0;
+            while (rs.next()) {
+                ID = rs.getString(1);
+                i++;
+            }
+            rs.close();
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
+            System.out.println("get customer method" + ex);
+        }
+        return ID;
+    }
+
     public void signIn(String userUsername, String userPassword) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call signIn('" + userUsername + "','" + userPassword + "');";
@@ -209,12 +264,12 @@ public class DatabaseManager {
         }
     }
 
-    public void insertCustomer(String title, String firstName, String lastName, String phone, String Address) {
+    public void insertMember(String title, String firstName, String lastName, String phone, String Address) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call insertCustomer('" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
         } catch (SQLException exp) {
-            System.out.println(exp);
+            JOptionPane.showMessageDialog(null, "This member already exists");
         }
     }
 
@@ -223,11 +278,11 @@ public class DatabaseManager {
             String insertQuery = "call insertBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
             s.execute(insertQuery);
         } catch (SQLException exp) {
-            System.out.println(exp);
+            JOptionPane.showMessageDialog(null, "This book already exists");
         }
     }
-    
-     public void insertBookReserve(String ref, String isbn, String customerId, String StaffId, String bookingDate) {
+
+    public void insertBookReserve(String ref, String isbn, String customerId, String StaffId, String bookingDate) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call insertBookReserve('" + ref + "', '" + isbn + "','" + customerId + "','" + StaffId + "','" + bookingDate + "');";
             s.execute(insertQuery);
@@ -270,15 +325,15 @@ public class DatabaseManager {
             JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
         }
     }
-    
-      public void returnBook(String ref, String returnDate) {
-       try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+
+    public void returnBook(String ref, String returnDate) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call returnBook('" + ref + "', '" + returnDate + "');";
             s.execute(insertQuery);
         } catch (SQLException exp) {
             System.out.println(exp);
         }
-      }
+    }
 
     public void restore() {
         try {

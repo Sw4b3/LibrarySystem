@@ -362,7 +362,7 @@ public class InsetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        manager.insertCustomer(getTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
+        manager.insertMember(getTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
         form.populateCustomer();
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
