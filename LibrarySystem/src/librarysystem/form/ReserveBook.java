@@ -36,7 +36,7 @@ public class ReserveBook extends javax.swing.JFrame {
 
     public final void setEmployeeID() {
         for (int i = 0; i < manager.getStaff().length; i++) {
-            staffComboBox.addItem(manager.getStaff()[i][1].toString()+" "+manager.getStaff()[i][2].toString());
+            staffComboBox.addItem(manager.getStaff()[i][0].toString()+" "+manager.getStaff()[i][1].toString());
         }
     }
 
@@ -223,8 +223,8 @@ public class ReserveBook extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         manager.insertBookReserve(getRef(), getISBN(), getMemberID(), getStaffID(), getBookingDate());
-        form.populateBooking();
         this.dispose();
+        form.refreshTables();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

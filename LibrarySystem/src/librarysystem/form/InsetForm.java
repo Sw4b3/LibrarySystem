@@ -22,6 +22,16 @@ public class InsetForm extends javax.swing.JFrame {
         this.setVisible(true);
         this.form = form;
     }
+    
+       public void disableBook() {
+        jTabbedPane1.setSelectedIndex(0);
+        jTabbedPane1.setEnabledAt(1, false);
+    }
+
+    public void disableCustomer() {
+        jTabbedPane1.setSelectedIndex(1);
+        jTabbedPane1.setEnabledAt(0, false);
+    }
 
     public String getISBN() {
         return isbn.getText();
@@ -368,7 +378,7 @@ public class InsetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        manager.insertBook(getISBN(),getTile(),getAuthor(),getYear(),getEdition(),getCategory(),getPublisher(),getCopies());
+        manager.insertBook(getISBN(), getTile(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies());
         form.populateBooks();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

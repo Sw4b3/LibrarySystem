@@ -31,7 +31,7 @@ public class MainForm extends javax.swing.JFrame {
         searchBooking();
         searchBook();
         searchMember();
-        //  fullscreen();
+       // fullscreen();
     }
 
     public void fullscreen() {
@@ -41,9 +41,15 @@ public class MainForm extends javax.swing.JFrame {
         this.setSize(xSize, ySize);
         this.setLocation(0, 0);
     }
+    
+    public void refreshTables(){
+        populateBooking();
+        populateBooks();
+        populateCustomer();
+    }
 
     public final void populateBooking() {
-        String columnNamesInventory[] = {"Ref", "ISBN", "Customer ID", "Staff ID", "Booking Date", "Return Date"};
+        String columnNamesInventory[] = {"Ref", "ISBN", "Customer ID", "Booking Date", "Return Date"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getBooking(), columnNamesInventory);
         bookingTable.setModel(tableModel);
     }
@@ -320,7 +326,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton12)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Home", jPanel1);
@@ -489,7 +495,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton9.setBackground(new java.awt.Color(53, 53, 53));
         jButton9.setForeground(java.awt.Color.white);
-        jButton9.setText("Add Customer");
+        jButton9.setText("Add Member");
         jButton9.setContentAreaFilled(false);
         jButton9.setOpaque(true);
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -500,7 +506,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jButton13.setBackground(new java.awt.Color(53, 53, 53));
         jButton13.setForeground(java.awt.Color.white);
-        jButton13.setText("Update Customer");
+        jButton13.setText("Update Details");
         jButton13.setContentAreaFilled(false);
         jButton13.setOpaque(true);
         jButton13.addActionListener(new java.awt.event.ActionListener() {
@@ -669,7 +675,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton18)
-                .addContainerGap(447, Short.MAX_VALUE))
+                .addContainerGap(509, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -700,7 +706,7 @@ public class MainForm extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -724,10 +730,12 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         insertForm = new InsetForm(this);
+         insertForm.disableBook();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         insertForm = new InsetForm(this);
+        insertForm.disableCustomer();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -761,8 +769,8 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        manager.returnBook(bookingTable.getValueAt(bookingTable.getSelectedRow(),0).toString(), "02/00/00");
-        populateBooking();
+        manager.returnBook(bookingTable.getValueAt(bookingTable.getSelectedRow(), 0).toString(), "02/00/00");
+        refreshTables();
         //new ReturnBook(this).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
