@@ -380,7 +380,7 @@ public class InsetForm extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         manager.insertBook(getISBN(), getTile(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies());
         form.populateBooks();
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

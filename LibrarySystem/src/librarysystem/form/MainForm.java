@@ -34,15 +34,15 @@ public class MainForm extends javax.swing.JFrame {
        // fullscreen();
     }
 
-    public void fullscreen() {
+    public final void fullscreen() {
         Toolkit tk = Toolkit.getDefaultToolkit();
         int xSize = ((int) tk.getScreenSize().getWidth());
         int ySize = ((int) tk.getScreenSize().getHeight());
         this.setSize(xSize, ySize);
         this.setLocation(0, 0);
     }
-    
-    public void refreshTables(){
+
+    public void refreshTables() {
         populateBooking();
         populateBooks();
         populateCustomer();
@@ -55,6 +55,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     public final void populateBooks() {
+//          String columnNamesInventory[] = {"ISBN", "Title", "Year", "Edition", "Category", "Copies"};
         String columnNamesInventory[] = {"ISBN", "Title", "Author", "Year", "Edition", "Category", "Publisher", "Copies"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getBooks(), columnNamesInventory);
         bookTable.setModel(tableModel);
@@ -326,7 +327,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton12)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Home", jPanel1);
@@ -335,10 +336,7 @@ public class MainForm extends javax.swing.JFrame {
 
         bookingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -675,7 +673,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addComponent(jButton17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton18)
-                .addContainerGap(509, Short.MAX_VALUE))
+                .addContainerGap(521, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -730,7 +728,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         insertForm = new InsetForm(this);
-         insertForm.disableBook();
+        insertForm.disableBook();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

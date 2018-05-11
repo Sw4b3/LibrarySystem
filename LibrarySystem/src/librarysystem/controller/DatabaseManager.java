@@ -24,8 +24,8 @@ import javax.swing.JOptionPane;
 public class DatabaseManager {
 
     String url = "jdbc:mysql://localhost:3306/LibraryDB";
-    String username = "root";
-    String password = "root";
+    String username = "general";
+    String password = "root"; 
     String driver = "com.mysql.jdbc.Driver";
     String location = ".\\src\\database\\libSys_bk.sql";
 
@@ -278,7 +278,7 @@ public class DatabaseManager {
             String insertQuery = "call insertBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
             s.execute(insertQuery);
         } catch (SQLException exp) {
-            JOptionPane.showMessageDialog(null, "This book already exists");
+            JOptionPane.showMessageDialog(null, exp+"This book already exists");
         }
     }
 
