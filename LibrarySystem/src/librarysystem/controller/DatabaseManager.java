@@ -337,7 +337,7 @@ public class DatabaseManager {
     public void backup() {
         try {
             String executeCmd = ".\\src\\database\\mysqldump.exe"
-                    + " -u " + username + " -p" + password + " resturantdb  -r " + location;
+                    + " -u root -proot librarydb  -r " + location;
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
             if (processComplete == 0) {
@@ -364,7 +364,7 @@ public class DatabaseManager {
     public void restore() {
         try {
             String[] executeCmd = new String[]{".\\src\\database\\mysql.exe",
-                "--user=" + username, "--password=" + password, "resturantdb",
+                "--user=root", "--password=root", "librarydb",
                 "-e", "source " + location};
 
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
