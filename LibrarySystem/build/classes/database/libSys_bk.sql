@@ -187,14 +187,13 @@ DROP TABLE IF EXISTS `customer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customer` (
   `CustomerID` int(11) NOT NULL AUTO_INCREMENT,
-  `Title` varchar(45) DEFAULT NULL,
   `FirstName` varchar(45) DEFAULT NULL,
   `LastName` varchar(45) DEFAULT NULL,
   `Phone` varchar(45) DEFAULT NULL,
   `Address` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`CustomerID`),
-  KEY `ALL_DATA` (`CustomerID`,`Title`,`FirstName`,`LastName`,`Phone`,`Address`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `ALL_DATA` (`CustomerID`,`FirstName`,`LastName`,`Phone`,`Address`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +202,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'Mr.','Andrew','Schwabe','076-387-1862','32 Canigou Ave, 6 Canigou Mansion, Rondebosch'),(2,'','Matthew','Van Der Bijl','098-233-4241','Here');
+INSERT INTO `customer` VALUES (1,'Andrew','Schwabe','076-387-1862','32 Canigou Ave, 6 Canigou Mansion, Rondebosch');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -304,7 +303,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES ('AndrewS','Andrew','Schwabe','Password',0,1);
+INSERT INTO `staff` VALUES ('Admin','','','Admin',0,1),('AndrewSchwabe','Andrew','Schwabe','Password',0,1);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,9 +316,9 @@ DROP TABLE IF EXISTS `staffview`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE VIEW `staffview` AS SELECT 
+ 1 AS `Username`,
  1 AS `FirstName`,
- 1 AS `LastName`,
- 1 AS `Active`*/;
+ 1 AS `LastName`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -371,7 +370,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `staffview` AS select `staff`.`FirstName` AS `FirstName`,`staff`.`LastName` AS `LastName`,`staff`.`Active` AS `Active` from `staff` */;
+/*!50001 VIEW `staffview` AS select `staff`.`Username` AS `Username`,`staff`.`FirstName` AS `FirstName`,`staff`.`LastName` AS `LastName` from `staff` where (`staff`.`Username` <> 'Admin') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -385,4 +384,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-11 22:41:47
+-- Dump completed on 2018-05-11 23:08:33

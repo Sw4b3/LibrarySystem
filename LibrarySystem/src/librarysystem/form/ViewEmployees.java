@@ -18,7 +18,7 @@ public class ViewEmployees extends javax.swing.JFrame {
     }
 
     public final void populateEmployees() {
-        String columnNamesInventory[] = {"Username", "First Name", "Last Name", "Password"};
+        String columnNamesInventory[] = {"Username", "First Name", "Last Name"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getStaff(), columnNamesInventory);
         employeeTable.setModel(tableModel);
     }
@@ -66,7 +66,7 @@ public class ViewEmployees extends javax.swing.JFrame {
 
         jButton14.setBackground(new java.awt.Color(53, 53, 53));
         jButton14.setForeground(java.awt.Color.white);
-        jButton14.setText("Update Customer");
+        jButton14.setText("Change Details");
         jButton14.setContentAreaFilled(false);
         jButton14.setOpaque(true);
         jButton14.addActionListener(new java.awt.event.ActionListener() {

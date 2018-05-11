@@ -117,7 +117,6 @@ public class DatabaseManager {
                 rowData[i][2] = rs.getObject(3);
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
-                rowData[i][5] = rs.getObject(6);
                 i++;
             }
             rs.close();

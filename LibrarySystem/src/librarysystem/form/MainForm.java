@@ -61,7 +61,7 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     public final void populateMember() {
-        String columnNamesInventory[] = {"Member ID", "Title", "First Name", "Last Name ", "Phone", "Address"};
+        String columnNamesInventory[] = {"Member ID", "First Name", "Last Name ", "Phone", "Address"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getCustomer(), columnNamesInventory);
         memberTable.setModel(tableModel);
     }
@@ -758,8 +758,6 @@ public class MainForm extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         controller.createLogginDialog(this);
-//        ManagementPanel manage = new ManagementPanel();
-//              manage.setVisible(true);
     }//GEN-LAST:event_jButton16ActionPerformed
 
 
