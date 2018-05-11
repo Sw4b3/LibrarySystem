@@ -405,7 +405,7 @@ public class UpdateForm extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         manager.updateCustomer(getID(), getCustomerTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
-        form.populateCustomer();
+        form.populateMember();
         this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
 

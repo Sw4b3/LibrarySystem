@@ -5,12 +5,10 @@
  */
 package librarysystem.controller;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.awt.HeadlessException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -25,7 +23,9 @@ public class DatabaseManager {
 
     String url = "jdbc:mysql://localhost:3306/LibraryDB";
     String username = "general";
-    String password = "root"; 
+    String password = "root";
+    String usernameAdmin = "admin";
+    String passwordAdmin = "admin";
     String driver = "com.mysql.jdbc.Driver";
     String location = ".\\src\\database\\libSys_bk.sql";
 
@@ -50,10 +50,11 @@ public class DatabaseManager {
                 rowData[i][2] = rs.getObject(3);
                 rowData[i][3] = rs.getObject(4);
                 rowData[i][4] = rs.getObject(5);
-              
+
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get booking method" + ex);
         }
@@ -88,6 +89,7 @@ public class DatabaseManager {
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get book method" + ex);
         }
@@ -119,6 +121,7 @@ public class DatabaseManager {
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get customer method" + ex);
         }
@@ -127,7 +130,7 @@ public class DatabaseManager {
 
     public Object[][] getStaff() {
         Object[][] rowData = null;
-        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+        try (Connection conn = DriverManager.getConnection(url, usernameAdmin, passwordAdmin); Statement s = conn.createStatement()) {
             Class.forName(driver).newInstance();
             String query = "call getStaff";
             ResultSet rs = s.executeQuery(query);
@@ -143,11 +146,11 @@ public class DatabaseManager {
             while (rs.next()) {
                 rowData[i][0] = rs.getObject(1);
                 rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);
-               
+                rowData[i][2] = rs.getObject(3);    
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get staff method" + ex);
         }
@@ -172,9 +175,11 @@ public class DatabaseManager {
             while (rs.next()) {
                 rowData[i][0] = rs.getObject(1);
                 rowData[i][1] = rs.getObject(2);
+                 rowData[i][2] = rs.getObject(3);
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get customer method" + ex);
         }
@@ -193,6 +198,7 @@ public class DatabaseManager {
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get customer method" + ex);
         }
@@ -211,6 +217,7 @@ public class DatabaseManager {
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get customer method" + ex);
         }
@@ -229,16 +236,27 @@ public class DatabaseManager {
                 i++;
             }
             rs.close();
+            conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
             System.out.println("get customer method" + ex);
         }
         return ID;
     }
 
+    public int adminLogin(String adminUsername, String adminPassword) {
+        try (Connection conn = DriverManager.getConnection(url, adminUsername, adminPassword)) {
+            return 1;
+        } catch (SQLException exp) {
+            System.out.println(exp);
+            return 0;
+        }
+    }
+
     public void signIn(String userUsername, String userPassword) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call signIn('" + userUsername + "','" + userPassword + "');";
             s.executeQuery(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -249,16 +267,18 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call signOut('" + userUsername + "');";
             s.executeQuery(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
 
     }
 
-    public void insertUser(String userUsername, String firstName, String lastName, String userPassword) {
-        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
-            String insertQuery = "call insertUser('" + userUsername + "', '" + firstName + "','" + lastName + "','" + userPassword + "');";
+    public void insertUser(String userUsername, String firstName, String lastName, String userPassword, int type) {
+        try (Connection conn = DriverManager.getConnection(url, usernameAdmin, passwordAdmin); Statement s = conn.createStatement()) {
+            String insertQuery = "call insertUser('" + userUsername + "', '" + firstName + "','" + lastName + "','" + userPassword + "','" + type + "');";
             s.execute(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -268,6 +288,7 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call insertCustomer('" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             JOptionPane.showMessageDialog(null, "This member already exists");
         }
@@ -277,8 +298,9 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call insertBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
             s.execute(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
-            JOptionPane.showMessageDialog(null, exp+"This book already exists");
+            JOptionPane.showMessageDialog(null, exp + "This book already exists");
         }
     }
 
@@ -286,6 +308,7 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call insertBookReserve('" + ref + "', '" + isbn + "','" + customerId + "','" + StaffId + "','" + bookingDate + "');";
             s.execute(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -295,6 +318,7 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call updateCustomer('" + id + "','" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -304,6 +328,7 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call updateBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
             s.execute(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }
@@ -330,6 +355,7 @@ public class DatabaseManager {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call returnBook('" + ref + "', '" + returnDate + "');";
             s.execute(insertQuery);
+            conn.close();
         } catch (SQLException exp) {
             System.out.println(exp);
         }

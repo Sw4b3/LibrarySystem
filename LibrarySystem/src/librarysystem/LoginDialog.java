@@ -3,6 +3,7 @@ package librarysystem;
 import javax.swing.JOptionPane;
 import librarysystem.controller.DatabaseManager;
 import librarysystem.form.MainForm;
+import librarysystem.form.ManagementPanel;
 
 /**
  *
@@ -17,7 +18,7 @@ public class LoginDialog extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.form=form;
+        this.form = form;
     }
 
     public String getUsername() {
@@ -29,11 +30,22 @@ public class LoginDialog extends javax.swing.JFrame {
     }
 
     private void authenticate() {
-        if (getUsername().equals(manager.getUser()[0][0]) && getPassword().equals(manager.getUser()[0][1])) {
+        boolean login = false;
+        for (Object[] user : manager.getUser()) {
+            if (getUsername().equals(user[0]) && getPassword().equals(user[1]) && (user[2].equals(1))) {
+                ManagementPanel manage = new ManagementPanel();
+                manage.setVisible(true);
+                login = true;
+                this.dispose();
+            } else if (getUsername().equals(user[0]) && getPassword().equals(user[1])) {
+                manager.signIn(getUsername(), getPassword());
+                form.setLoggedin(getUsername());
+                login = true;
+                this.dispose();
+            }
+        }
+        if (login) {
             JOptionPane.showMessageDialog(null, "Logged in");
-            manager.signIn(getUsername(), getPassword());
-            form.setLoggedin(getUsername());
-            this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Username/Password");
         }

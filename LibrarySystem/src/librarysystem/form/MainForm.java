@@ -27,11 +27,11 @@ public class MainForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         populateBooking();
         populateBooks();
-        populateCustomer();
+        populateMember();
         searchBooking();
         searchBook();
         searchMember();
-       // fullscreen();
+        // fullscreen();
     }
 
     public final void fullscreen() {
@@ -45,7 +45,7 @@ public class MainForm extends javax.swing.JFrame {
     public void refreshTables() {
         populateBooking();
         populateBooks();
-        populateCustomer();
+        populateMember();
     }
 
     public final void populateBooking() {
@@ -55,32 +55,41 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     public final void populateBooks() {
-//          String columnNamesInventory[] = {"ISBN", "Title", "Year", "Edition", "Category", "Copies"};
         String columnNamesInventory[] = {"ISBN", "Title", "Author", "Year", "Edition", "Category", "Publisher", "Copies"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getBooks(), columnNamesInventory);
         bookTable.setModel(tableModel);
     }
 
-    public final void populateCustomer() {
+    public final void populateMember() {
         String columnNamesInventory[] = {"Member ID", "Title", "First Name", "Last Name ", "Phone", "Address"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getCustomer(), columnNamesInventory);
         memberTable.setModel(tableModel);
     }
 
-    public String[] getCustomer() {
-        String customerInfo[] = new String[memberTable.getColumnCount()];
-        for (int i = 0; i < memberTable.getColumnCount(); i++) {
-            customerInfo[i] = memberTable.getValueAt(memberTable.getSelectedRow(), i).toString();
+    public String[] getMember() {
+        if (memberTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Please Select Row");
+        } else {
+            String customerInfo[] = new String[memberTable.getColumnCount()];
+            for (int i = 0; i < memberTable.getColumnCount(); i++) {
+                customerInfo[i] = memberTable.getValueAt(memberTable.getSelectedRow(), i).toString();
+            }
+            return customerInfo;
         }
-        return customerInfo;
+        return null;
     }
 
     public String[] getBook() {
-        String bookInfo[] = new String[bookTable.getColumnCount()];
-        for (int i = 0; i < bookTable.getColumnCount(); i++) {
-            bookInfo[i] = bookTable.getValueAt(bookTable.getSelectedRow(), i).toString();
+        if (bookTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Please Select Row");
+        } else {
+            String bookInfo[] = new String[bookTable.getColumnCount()];
+            for (int i = 0; i < bookTable.getColumnCount(); i++) {
+                bookInfo[i] = bookTable.getValueAt(bookTable.getSelectedRow(), i).toString();
+            }
+            return bookInfo;
         }
-        return bookInfo;
+        return null;
     }
 
     public void setLoggedin(String user) {
@@ -233,9 +242,8 @@ public class MainForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton17 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jButton18 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -600,27 +608,16 @@ public class MainForm extends javax.swing.JFrame {
 
         jLabel5.setText("Database Settings");
 
-        jButton17.setBackground(new java.awt.Color(53, 53, 53));
-        jButton17.setForeground(java.awt.Color.white);
-        jButton17.setText("Add Employee");
-        jButton17.setContentAreaFilled(false);
-        jButton17.setOpaque(true);
-        jButton17.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton17ActionPerformed(evt);
-            }
-        });
-
         jLabel11.setText("Staff Management");
 
-        jButton18.setBackground(new java.awt.Color(53, 53, 53));
-        jButton18.setForeground(java.awt.Color.white);
-        jButton18.setText("View Employees");
-        jButton18.setContentAreaFilled(false);
-        jButton18.setOpaque(true);
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
+        jButton16.setBackground(new java.awt.Color(53, 53, 53));
+        jButton16.setForeground(java.awt.Color.white);
+        jButton16.setText("Open Management Panel");
+        jButton16.setContentAreaFilled(false);
+        jButton16.setOpaque(true);
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton18ActionPerformed(evt);
+                jButton16ActionPerformed(evt);
             }
         });
 
@@ -636,23 +633,20 @@ public class MainForm extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)
                             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                    .addGap(42, 42, 42)
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton11)))
-                                .addGroup(jPanel6Layout.createSequentialGroup()
-                                    .addGap(44, 44, 44)
-                                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton11))
+                        .addGap(1, 453, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(181, 181, 181)
+                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -669,11 +663,9 @@ public class MainForm extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton18)
-                .addContainerGap(521, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(496, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -711,25 +703,18 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        manager.signOut(getLoggedIn());
-        this.dispose();
-    }//GEN-LAST:event_jButton12ActionPerformed
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        manager.restore();
+    }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        manager.signOut(getLoggedIn());
-        JOptionPane.showMessageDialog(null, "Logged out");
-        loggedinUser.setText("Currently Logged in: ");
-    }//GEN-LAST:event_jButton14ActionPerformed
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        manager.backup();
+    }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        controller.createLogginDialog(this);
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        insertForm = new InsetForm(this);
-        insertForm.disableBook();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        updateForm = new UpdateForm(this);
+        updateForm.setCustomerDetail(getMember());
+    }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         insertForm = new InsetForm(this);
@@ -741,36 +726,41 @@ public class MainForm extends javax.swing.JFrame {
         updateForm.setBookDetail(getBook());
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        updateForm = new UpdateForm(this);
-        updateForm.setCustomerDetail(getCustomer());
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        manager.backup();
-    }//GEN-LAST:event_jButton10ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        manager.restore();
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        new InsertUser().setVisible(true);
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new ReserveBook(this).setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        new ViewEmployees().setVisible(true);
-    }//GEN-LAST:event_jButton18ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        insertForm = new InsetForm(this);
+        insertForm.disableBook();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         manager.returnBook(bookingTable.getValueAt(bookingTable.getSelectedRow(), 0).toString(), "02/00/00");
         refreshTables();
         //new ReturnBook(this).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new ReserveBook(this).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        controller.createLogginDialog(this);
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        manager.signOut(getLoggedIn());
+        JOptionPane.showMessageDialog(null, "Logged out");
+        loggedinUser.setText("Currently Logged in: ");
+    }//GEN-LAST:event_jButton14ActionPerformed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        manager.signOut(getLoggedIn());
+        this.dispose();
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        controller.createLogginDialog(this);
+//        ManagementPanel manage = new ManagementPanel();
+//              manage.setVisible(true);
+    }//GEN-LAST:event_jButton16ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -783,8 +773,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

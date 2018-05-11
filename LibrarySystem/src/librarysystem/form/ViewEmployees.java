@@ -37,6 +37,7 @@ public class ViewEmployees extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel4.setBackground(java.awt.Color.white);
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jButton13.setBackground(new java.awt.Color(53, 53, 53));
         jButton13.setForeground(java.awt.Color.white);
@@ -105,7 +106,7 @@ public class ViewEmployees extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 705, Short.MAX_VALUE)
+            .addGap(0, 709, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
