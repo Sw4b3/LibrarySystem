@@ -7,7 +7,7 @@ import librarysystem.controller.DatabaseManager;
  *
  * @author Andrew
  */
-public class ViewEmployees extends javax.swing.JFrame {
+public class ViewEmployees extends javax.swing.JFrame { //Deprecated
 
     DatabaseManager manager = new DatabaseManager();
 
