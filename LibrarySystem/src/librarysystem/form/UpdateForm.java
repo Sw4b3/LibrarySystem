@@ -1,5 +1,6 @@
 package librarysystem.form;
 
+import librarysystem.FunctionValidation;
 import librarysystem.controller.DatabaseManager;
 
 /**
@@ -9,6 +10,7 @@ import librarysystem.controller.DatabaseManager;
 public class UpdateForm extends javax.swing.JFrame {
 
     DatabaseManager manager = new DatabaseManager();
+    FunctionValidation validation = new FunctionValidation();
     MainForm form;
 
     public UpdateForm(MainForm form) {
@@ -78,24 +80,24 @@ public class UpdateForm extends javax.swing.JFrame {
     public String getID() {
         return customerID.getText();
     }
-    
-      public String getCustomerTitle() {
+
+    public String getCustomerTitle() {
         return customerTitle.getText();
     }
-      
-      public String getFirstName() {
+
+    public String getFirstName() {
         return firstName.getText();
     }
-      
-      public String getLastName() {
+
+    public String getLastName() {
         return lastName.getText();
     }
-      
-      public String getPhone() {
+
+    public String getPhone() {
         return phone.getText();
     }
-      
-      public String getAddress() {
+
+    public String getAddress() {
         return address.getText();
     }
 
@@ -398,15 +400,19 @@ public class UpdateForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        manager.updateBook(getISBN(), getBookTitle(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies());
-        form.populateBooks();
-        this.dispose();
+        if (validation.Validation(getISBN(), getBookTitle(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies())) {
+            manager.updateBook(getISBN(), getBookTitle(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies());
+            form.populateBooks();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        manager.updateCustomer(getID(), getCustomerTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
-        form.populateMember();
-        this.dispose();
+        if (validation.Validation(getFirstName(), getLastName(), getPhone(), getAddress())) {
+            manager.updateCustomer(getID(), getCustomerTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
+            form.populateMember();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
 

@@ -36,7 +36,7 @@ public class ReserveBook extends javax.swing.JFrame {
 
     public final void setEmployeeID() {
         for (int i = 0; i < manager.getStaff().length; i++) {
-            staffComboBox.addItem(manager.getStaff()[i][1].toString()+" "+manager.getStaff()[i][2].toString());
+            staffComboBox.addItem(manager.getStaff()[i][0].toString()+" "+manager.getStaff()[i][1].toString());
         }
     }
 

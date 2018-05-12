@@ -303,7 +303,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES ('AndrewS','Andrew','Schwabe','Password',0,1);
+INSERT INTO `staff` VALUES ('Admin','','','Admin',0,1),('AndrewSchwabe','Andrew','Schwabe','Password',0,1);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,7 +370,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `staffview` AS select `staff`.`FirstName` AS `FirstName`,`staff`.`LastName` AS `LastName`,`staff`.`Active` AS `Active` from `staff` */;
+/*!50001 VIEW `staffview` AS select `staff`.`FirstName` AS `FirstName`,`staff`.`LastName` AS `LastName`,`staff`.`Active` AS `Active` from `staff` where (`staff`.`Username` <> 'Admin') */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -384,4 +384,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-12 11:46:37
+-- Dump completed on 2018-05-12 17:48:33
