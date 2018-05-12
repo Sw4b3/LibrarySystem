@@ -144,7 +144,7 @@ public class DatabaseManager {
             while (rs.next()) {
                 rowData[i][0] = rs.getObject(1);
                 rowData[i][1] = rs.getObject(2);
-                rowData[i][2] = rs.getObject(3);    
+                rowData[i][2] = rs.getObject(3);
                 i++;
             }
             rs.close();
@@ -173,7 +173,7 @@ public class DatabaseManager {
             while (rs.next()) {
                 rowData[i][0] = rs.getObject(1);
                 rowData[i][1] = rs.getObject(2);
-                 rowData[i][2] = rs.getObject(3);
+                rowData[i][2] = rs.getObject(3);
                 i++;
             }
             rs.close();
@@ -288,7 +288,7 @@ public class DatabaseManager {
             s.execute(insertQuery);
             conn.close();
         } catch (SQLException exp) {
-            JOptionPane.showMessageDialog(null, exp+" Error");
+            JOptionPane.showMessageDialog(null, exp + " Error");
         }
     }
 
@@ -312,7 +312,7 @@ public class DatabaseManager {
         }
     }
 
-    public void updateCustomer(String id, String title, String firstName, String lastName, String phone, String Address) {
+    public void updateMember(String id, String title, String firstName, String lastName, String phone, String Address) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call updateCustomer('" + id + "','" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
@@ -325,6 +325,46 @@ public class DatabaseManager {
     public void updateBook(String ISBN, String title, String author, String year, String edition, String category, String publisher, String copies) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             String insertQuery = "call updateBook('" + ISBN + "', '" + title + "','" + author + "','" + year + "','" + edition + "','" + category + "','" + publisher + "','" + copies + "');";
+            s.execute(insertQuery);
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void deleteBookReserve(String isbn) {
+        try (Connection conn = DriverManager.getConnection(url, usernameAdmin, passwordAdmin); Statement s = conn.createStatement()) {
+            String insertQuery = "call deleteBooking('" + isbn + "');";
+            s.execute(insertQuery);
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void deleteMember(String id) {
+        try (Connection conn = DriverManager.getConnection(url, usernameAdmin, passwordAdmin); Statement s = conn.createStatement()) {
+            String insertQuery = "call deleteMember('" + id + "');";
+            s.execute(insertQuery);
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void deleteBook(String isbn) {
+        try (Connection conn = DriverManager.getConnection(url, usernameAdmin, passwordAdmin); Statement s = conn.createStatement()) {
+            String insertQuery = "call deleteBook('" + isbn + "');";
+            s.execute(insertQuery);
+            conn.close();
+        } catch (SQLException exp) {
+            System.out.println(exp);
+        }
+    }
+
+    public void returnBook(String ref, String returnDate) {
+        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
+            String insertQuery = "call returnBook('" + ref + "', '" + returnDate + "');";
             s.execute(insertQuery);
             conn.close();
         } catch (SQLException exp) {
@@ -346,16 +386,6 @@ public class DatabaseManager {
 
         } catch (IOException | InterruptedException ex) {
             JOptionPane.showMessageDialog(null, "Error at Backuprestore" + ex.getMessage());
-        }
-    }
-
-    public void returnBook(String ref, String returnDate) {
-        try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
-            String insertQuery = "call returnBook('" + ref + "', '" + returnDate + "');";
-            s.execute(insertQuery);
-            conn.close();
-        } catch (SQLException exp) {
-            System.out.println(exp);
         }
     }
 

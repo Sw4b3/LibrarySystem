@@ -1,5 +1,6 @@
 package librarysystem.form;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import librarysystem.controller.DatabaseManager;
 
@@ -10,36 +11,90 @@ import librarysystem.controller.DatabaseManager;
 public class ManagementPanel extends javax.swing.JFrame {
 
     DatabaseManager manager = new DatabaseManager();
+    String state;
 
     public ManagementPanel() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-      public final void populateEmployees() {
+
+//    public enum state {
+//        BOOKING, BOOK, CUSTOMER
+//    }
+
+    public final void populateEmployees() {
         String columnNamesInventory[] = {"Username", "First Name", "Last Name"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getStaff(), columnNamesInventory);
         bookTable.setModel(tableModel);
+        state = "EMPLOYEE";
     }
 
     public final void populateBooking() {
         String columnNamesInventory[] = {"Ref", "ISBN", "Customer ID", "Booking Date", "Return Date"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getBooking(), columnNamesInventory);
         bookTable.setModel(tableModel);
+        state = "BOOKING";
     }
 
     public final void populateBooks() {
         String columnNamesInventory[] = {"ISBN", "Title", "Author", "Year", "Edition", "Category", "Publisher", "Copies"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getBooks(), columnNamesInventory);
         bookTable.setModel(tableModel);
+        state = "BOOK";
     }
 
     public final void populateMember() {
         String columnNamesInventory[] = {"Member ID", "First Name", "Last Name ", "Phone", "Address"};
         DefaultTableModel tableModel = new DefaultTableModel(manager.getCustomer(), columnNamesInventory);
         bookTable.setModel(tableModel);
+        state = "MEMBER";
     }
 
+    public String getBook() {
+        if (bookTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Please Select Row");
+        } else {
+            String bookInfo;
+            bookInfo = bookTable.getValueAt(bookTable.getSelectedRow(), 0).toString();
+            return bookInfo;
+        }
+        return null;
+    }
+
+    public String getBooking() {
+        if (bookTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Please Select Row");
+        } else {
+            String bookInfo;
+            bookInfo = bookTable.getValueAt(bookTable.getSelectedRow(), 0).toString();
+            return bookInfo;
+        }
+        return null;
+    }
+
+    public String getMember() {
+        if (bookTable.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Please Select Row");
+        } else {
+            String bookInfo;
+            bookInfo = bookTable.getValueAt(bookTable.getSelectedRow(), 0).toString();
+            return bookInfo;
+        }
+        return null;
+    }
+
+//    public String[] getStaff() {
+//        if (bookTable.getSelectedRow() == -1) {
+//            JOptionPane.showMessageDialog(null, "Please Select Row");
+//        } else {
+//            String bookInfo[] = new String[bookTable.getColumnCount()];
+//            for (int i = 0; i < bookTable.getColumnCount(); i++) {
+//                bookInfo[i] = bookTable.getValueAt(bookTable.getSelectedRow(), i).toString();
+//            }
+//            return bookInfo;
+//        }
+//        return null;
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -67,7 +122,7 @@ public class ManagementPanel extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         bookTable.setShowVerticalLines(false);
@@ -255,7 +310,7 @@ public class ManagementPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-      populateEmployees();
+        populateEmployees();
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
@@ -267,15 +322,31 @@ public class ManagementPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-       populateBooks();
+        populateBooks();
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-       populateMember();
+        populateMember();
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        // TODO add your handling code here:
+        switch (state) {
+            case "EMPLOYEE":
+                populateEmployees();
+                break;
+            case "BOOKING":
+                manager.deleteBookReserve(getBooking());
+                populateBooking();
+                break;
+            case "BOOK":
+                manager.deleteBook(getBook());
+                populateBooks();
+                break;
+            case "MEMBER":
+                manager.deleteMember(getMember());
+                populateMember();
+                break;
+        }
     }//GEN-LAST:event_jButton23ActionPerformed
 
 

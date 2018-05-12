@@ -409,7 +409,7 @@ public class UpdateForm extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (validation.Validation(getFirstName(), getLastName(), getPhone(), getAddress())) {
-            manager.updateCustomer(getID(), getCustomerTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
+            manager.updateMember(getID(), getCustomerTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
             form.populateMember();
             this.dispose();
         }
