@@ -5,11 +5,12 @@
         <group>
             <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/form/UpdateForm.java</file>
             <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/form/InsetForm.java</file>
-            <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/database/libSys_bk.sql</file>
+            <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/form/ManagementPanel.java</file>
             <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/controller/DatabaseManager.java</file>
+            <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/form/InsertUser.java</file>
             <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/form/ReserveBook.java</file>
             <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/form/MainForm.java</file>
-            <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/controller/LibrarySystem.java</file>
+            <file>file:/C:/Users/Andrew/Documents/NetBeansProjects/LibrarySystem/LibrarySystem/src/librarysystem/FunctionValidation.java</file>
         </group>
     </open-files>
 </project-private>

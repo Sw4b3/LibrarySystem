@@ -173,7 +173,7 @@ SET character_set_client = utf8;
  1 AS `Col_placeholder1`,
  1 AS `YearPublished`,
  1 AS `Edition`,
- 1 AS `(SELECT Genre FROM genre WHERE genre.GenreID=book.GenreID)`,
+ 1 AS `(SELECT GenreName FROM genre WHERE genre.GenreID=book.GenreID)`,
  1 AS `Col_placeholder2`,
  1 AS `Copies`*/;
 SET character_set_client = @saved_cs_client;
@@ -239,7 +239,7 @@ DROP TABLE IF EXISTS `genre`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `genre` (
   `GenreID` int(11) NOT NULL AUTO_INCREMENT,
-  `Genre` varchar(45) DEFAULT NULL,
+  `GenreName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`GenreID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -303,7 +303,7 @@ CREATE TABLE `staff` (
 
 LOCK TABLES `staff` WRITE;
 /*!40000 ALTER TABLE `staff` DISABLE KEYS */;
-INSERT INTO `staff` VALUES ('Admin','','','Admin',0,1),('AndrewSchwabe','Andrew','Schwabe','Password',0,1);
+INSERT INTO `staff` VALUES ('AndrewS','Andrew','Schwabe','Password',0,1);
 /*!40000 ALTER TABLE `staff` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,9 +316,9 @@ DROP TABLE IF EXISTS `staffview`;
 SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = utf8;
 /*!50001 CREATE VIEW `staffview` AS SELECT 
- 1 AS `Username`,
  1 AS `FirstName`,
- 1 AS `LastName`*/;
+ 1 AS `LastName`,
+ 1 AS `Active`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -352,7 +352,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `bookview` AS select `book`.`ISBN` AS `ISBN`,`book`.`Title` AS `Title`,(select `author`.`AuthorName` from `author` where (`author`.`AuthorID` = `book`.`AuthorID`)) AS `Col_placeholder1`,`book`.`YearPublished` AS `YearPublished`,`book`.`Edition` AS `Edition`,(select `genre`.`Genre` from `genre` where (`genre`.`GenreID` = `book`.`GenreID`)) AS `(SELECT Genre FROM genre WHERE genre.GenreID=book.GenreID)`,(select `publisher`.`PublisherName` from `publisher` where (`publisher`.`PublisherID` = `book`.`PublisherID`)) AS `Col_placeholder2`,`book`.`Copies` AS `Copies` from `book` USE INDEX (PRIMARY) */;
+/*!50001 VIEW `bookview` AS select `book`.`ISBN` AS `ISBN`,`book`.`Title` AS `Title`,(select `author`.`AuthorName` from `author` where (`author`.`AuthorID` = `book`.`AuthorID`)) AS `Col_placeholder1`,`book`.`YearPublished` AS `YearPublished`,`book`.`Edition` AS `Edition`,(select `genre`.`GenreName` from `genre` where (`genre`.`GenreID` = `book`.`GenreID`)) AS `(SELECT GenreName FROM genre WHERE genre.GenreID=book.GenreID)`,(select `publisher`.`PublisherName` from `publisher` where (`publisher`.`PublisherID` = `book`.`PublisherID`)) AS `Col_placeholder2`,`book`.`Copies` AS `Copies` from `book` USE INDEX (PRIMARY) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -370,7 +370,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `staffview` AS select `staff`.`Username` AS `Username`,`staff`.`FirstName` AS `FirstName`,`staff`.`LastName` AS `LastName` from `staff` where (`staff`.`Username` <> 'Admin') */;
+/*!50001 VIEW `staffview` AS select `staff`.`FirstName` AS `FirstName`,`staff`.`LastName` AS `LastName`,`staff`.`Active` AS `Active` from `staff` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -384,4 +384,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-11 23:08:33
+-- Dump completed on 2018-05-12 11:46:37

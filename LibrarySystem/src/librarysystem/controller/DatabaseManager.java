@@ -283,13 +283,13 @@ public class DatabaseManager {
         }
     }
 
-    public void insertMember(String title, String firstName, String lastName, String phone, String Address) {
+    public void insertMember(String firstName, String lastName, String phone, String Address) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
-            String insertQuery = "call insertCustomer('" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
+            String insertQuery = "call insertCustomer('" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
             conn.close();
         } catch (SQLException exp) {
-            JOptionPane.showMessageDialog(null, "This member already exists");
+            JOptionPane.showMessageDialog(null, exp+" Error");
         }
     }
 
@@ -299,7 +299,7 @@ public class DatabaseManager {
             s.execute(insertQuery);
             conn.close();
         } catch (SQLException exp) {
-            JOptionPane.showMessageDialog(null, exp + "This book already exists");
+            JOptionPane.showMessageDialog(null, exp + " Error");
         }
     }
 

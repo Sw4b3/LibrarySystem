@@ -5,6 +5,7 @@
  */
 package librarysystem.form;
 
+import librarysystem.FunctionValidation;
 import librarysystem.controller.DatabaseManager;
 
 /**
@@ -15,6 +16,7 @@ public class InsetForm extends javax.swing.JFrame {
 
     DatabaseManager manager = new DatabaseManager();
     MainForm form;
+    FunctionValidation validation = new FunctionValidation();
 
     public InsetForm(MainForm form) {
         initComponents();
@@ -22,8 +24,8 @@ public class InsetForm extends javax.swing.JFrame {
         this.setVisible(true);
         this.form = form;
     }
-    
-       public void disableBook() {
+
+    public void disableBook() {
         jTabbedPane1.setSelectedIndex(0);
         jTabbedPane1.setEnabledAt(1, false);
     }
@@ -63,10 +65,6 @@ public class InsetForm extends javax.swing.JFrame {
 
     public String getCopies() {
         return copies.getText();
-    }
-
-    public String getCustomerTitle() {
-        return customerTitle.getText();
     }
 
     public String getFirstName() {
@@ -110,8 +108,6 @@ public class InsetForm extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         customer = new javax.swing.JPanel();
-        customerTitle = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         customerFirstName = new javax.swing.JTextField();
         customerLastName = new javax.swing.JTextField();
@@ -248,8 +244,6 @@ public class InsetForm extends javax.swing.JFrame {
 
         customer.setBackground(java.awt.Color.white);
 
-        jLabel9.setText("Title");
-
         jLabel10.setText("First Name");
 
         jLabel11.setText("Last Name");
@@ -297,19 +291,14 @@ public class InsetForm extends javax.swing.JFrame {
                                     .addGroup(customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel13)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(customerPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                                     .addComponent(customerLastName)
                                     .addComponent(customerAddress, javax.swing.GroupLayout.Alignment.TRAILING)))
                             .addGroup(customerLayout.createSequentialGroup()
-                                .addGroup(customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel9))
+                                .addComponent(jLabel10)
                                 .addGap(62, 62, 62)
-                                .addGroup(customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(customerFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                                    .addComponent(customerTitle)))))
+                                .addComponent(customerFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(customerLayout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -320,11 +309,7 @@ public class InsetForm extends javax.swing.JFrame {
         customerLayout.setVerticalGroup(
             customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(customerTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(49, 49, 49)
                 .addGroup(customerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(customerFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -372,15 +357,19 @@ public class InsetForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        manager.insertMember(getTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
-        form.populateMember();
-        this.dispose();
+        if (validation.Validation(getFirstName(), getLastName(), getPhone(), getAddress())) {
+            manager.insertMember(getFirstName(), getLastName(), getPhone(), getAddress());
+            form.populateMember();
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(validation.Validation(getISBN(), getTile(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies())){
         manager.insertBook(getISBN(), getTile(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies());
         form.populateBooks();
-        //this.dispose();
+        this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -394,7 +383,6 @@ public class InsetForm extends javax.swing.JFrame {
     private javax.swing.JTextField customerFirstName;
     private javax.swing.JTextField customerLastName;
     private javax.swing.JTextField customerPhone;
-    private javax.swing.JTextField customerTitle;
     private javax.swing.JTextField edition;
     private javax.swing.JTextField isbn;
     private javax.swing.JButton jButton1;
@@ -413,7 +401,6 @@ public class InsetForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField publisher;
     private javax.swing.JTextField title;
