@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: librarydb
 -- ------------------------------------------------------
--- Server version	5.7.17-log
+-- Server version	5.5.5-10.1.32-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -69,7 +69,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES ('978-0545139700','Harry Potter and the Deathly Hallows',1,'2009','1',1,1,'5'),('978-0545139702','Lord of the Rings',1,'2008','3',1,1,'2'),('978-0545139745','The Da Vinci Code',1,'2003','2',1,1,'1');
+INSERT INTO `book` VALUES ('978-0545139700','Harry Potter and the Deathly Hallows',1,'2009','1',1,1,'5'),('978-0545139702','Lord of the Rings',1,'2008','3',1,1,'2'),('978-0545139745','The Da Vinci Code',1,'2003','2',1,1,'0');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,6 +100,7 @@ CREATE TABLE `bookreserve` (
 
 LOCK TABLES `bookreserve` WRITE;
 /*!40000 ALTER TABLE `bookreserve` DISABLE KEYS */;
+INSERT INTO `bookreserve` VALUES ('#394-568','978-0545139745','1','AndrewSchwabe','2018-05-17','Not Returned');
 /*!40000 ALTER TABLE `bookreserve` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -384,4 +385,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-12 20:22:18
+-- Dump completed on 2018-05-17 20:11:38

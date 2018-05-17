@@ -38,11 +38,10 @@ public class UpdateForm extends javax.swing.JFrame {
         jTabbedPane1.setSelectedIndex(1);
         jTabbedPane1.setEnabledAt(0, false);
         customerID.setText(info[0]);
-        customerTitle.setText(info[1]);
-        firstName.setText(info[2]);
-        lastName.setText(info[3]);
-        phone.setText(info[4]);
-        address.setText(info[5]);
+        firstName.setText(info[1]);
+        lastName.setText(info[2]);
+        phone.setText(info[3]);
+        address.setText(info[4]);
     }
 
     public String getISBN() {
@@ -79,10 +78,6 @@ public class UpdateForm extends javax.swing.JFrame {
 
     public String getID() {
         return customerID.getText();
-    }
-
-    public String getCustomerTitle() {
-        return customerTitle.getText();
     }
 
     public String getFirstName() {
@@ -127,9 +122,7 @@ public class UpdateForm extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         customerID = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        customerTitle = new javax.swing.JTextField();
         firstName = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -149,6 +142,8 @@ public class UpdateForm extends javax.swing.JFrame {
         jPanel1.setBackground(java.awt.Color.white);
 
         jLabel1.setText("ISBN");
+
+        isbn.setEnabled(false);
 
         jLabel2.setText("Title");
 
@@ -266,8 +261,6 @@ public class UpdateForm extends javax.swing.JFrame {
 
         jPanel2.setBackground(java.awt.Color.white);
 
-        jLabel9.setText("Title");
-
         jLabel10.setText("First Name");
 
         jLabel11.setText("Last Name");
@@ -319,7 +312,7 @@ public class UpdateForm extends javax.swing.JFrame {
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
                                                 .addComponent(jLabel13))
-                                            .addComponent(jLabel10))
+                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lastName, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
@@ -327,13 +320,9 @@ public class UpdateForm extends javax.swing.JFrame {
                                     .addComponent(phone, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(address)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(ID))
+                                .addComponent(ID)
                                 .addGap(53, 53, 53)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(customerTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                                    .addComponent(customerID)))))
+                                .addComponent(customerID, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(120, 120, 120)
                         .addComponent(jButton5)
@@ -350,10 +339,6 @@ public class UpdateForm extends javax.swing.JFrame {
                     .addComponent(ID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -368,7 +353,7 @@ public class UpdateForm extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton5))
@@ -400,7 +385,7 @@ public class UpdateForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (validation.Validation(getISBN(), getBookTitle(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies())) {
+        if (validation.Validation(getBookTitle(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies())) {
             manager.updateBook(getISBN(), getBookTitle(), getAuthor(), getYear(), getEdition(), getCategory(), getPublisher(), getCopies());
             form.populateBooks();
             this.dispose();
@@ -409,7 +394,7 @@ public class UpdateForm extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (validation.Validation(getFirstName(), getLastName(), getPhone(), getAddress())) {
-            manager.updateMember(getID(), getCustomerTitle(), getFirstName(), getLastName(), getPhone(), getAddress());
+            manager.updateMember(getID(), getFirstName(), getLastName(), getPhone(), getAddress());
             form.populateMember();
             this.dispose();
         }
@@ -423,7 +408,6 @@ public class UpdateForm extends javax.swing.JFrame {
     private javax.swing.JTextField category;
     private javax.swing.JTextField copies;
     private javax.swing.JTextField customerID;
-    private javax.swing.JTextField customerTitle;
     private javax.swing.JTextField edition;
     private javax.swing.JTextField firstName;
     private javax.swing.JTextField isbn;
@@ -443,7 +427,6 @@ public class UpdateForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;

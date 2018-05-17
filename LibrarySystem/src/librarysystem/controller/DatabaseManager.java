@@ -312,9 +312,9 @@ public class DatabaseManager {
         }
     }
 
-    public void updateMember(String id, String title, String firstName, String lastName, String phone, String Address) {
+    public void updateMember(String id, String firstName, String lastName, String phone, String Address) {
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
-            String insertQuery = "call updateCustomer('" + id + "','" + title + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
+            String insertQuery = "call updateCustomer('" + id + "', '" + firstName + "','" + lastName + "','" + phone + "','" + Address + "');";
             s.execute(insertQuery);
             conn.close();
         } catch (SQLException exp) {
@@ -375,7 +375,7 @@ public class DatabaseManager {
     public void backup() {
         try {
             String executeCmd = ".\\src\\database\\mysqldump.exe"
-                    + " -u root -proot librarydb  -r " + location;
+                    + " -u admin -padmin librarydb  -r " + location;
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
             int processComplete = runtimeProcess.waitFor();
             if (processComplete == 0) {
@@ -392,7 +392,7 @@ public class DatabaseManager {
     public void restore() {
         try {
             String[] executeCmd = new String[]{".\\src\\database\\mysql.exe",
-                "--user=root", "--password=root", "librarydb",
+                "--user=admin", "--password=admin", "librarydb",
                 "-e", "source " + location};
 
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);

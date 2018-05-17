@@ -47,6 +47,26 @@ public class FunctionValidation {
         return false;
     }
 
+    public boolean Validation(String title, String author, String year, String edition, String category, String publisher, String Copies) {
+
+        if (nameValidation(title)) {
+            if (nameValidation(author)) {
+                if (yearValidation(year)) {
+                    if (digitValidation(edition)) {
+                        if (nameValidation(category)) {
+                            if (nameValidation(publisher)) {
+                                if (digitValidation(Copies)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public boolean nameValidation(String text) {
         if (text.length() != 0 && text.matches("[a-zA-Z\\s]+")) {
             return true;
