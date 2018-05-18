@@ -68,7 +68,7 @@ public class FunctionValidation {
     }
 
     public boolean nameValidation(String text) {
-        if (text.length() != 0 && text.matches("[a-zA-Z\\s]+")) {
+        if (text.length() != 0 && text.matches("[a-zA-Z\\s_.-]+")) {
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "Incorrect Name. Must not be Null and Must Contain letters");
@@ -95,10 +95,10 @@ public class FunctionValidation {
     }
 
     public boolean isbnValidation(String number) {
-        if (number.length() == 10 && number.matches("[0-9]+")) {
+        if (number.length() == 13 && number.matches("[0-9]+")) {
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "Incorrect ISBN. Must contain Numbers and must be 10 digits Long");
+            JOptionPane.showMessageDialog(null, "Incorrect ISBN. Must contain Numbers and must be 13 digits Long");
             return false;
         }
     }

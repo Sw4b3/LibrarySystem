@@ -20,6 +20,7 @@ public class ReserveBook extends javax.swing.JFrame {
         this.form = form;
         setReference();
         setDate();
+        setBookName();
         setEmployeeID();
         setMemberName();
         //  setUser();
@@ -34,6 +35,12 @@ public class ReserveBook extends javax.swing.JFrame {
         ref.setText("#" + Integer.toString(value) + "-" + Integer.toString(value1));
     }
 
+     public final void setBookName() {
+        for (int i = 0; i < manager.getBooks().length; i++) {
+            titleComboBox.addItem(manager.getBooks()[i][1].toString());
+        }
+    }
+    
     public final void setEmployeeID() {
         for (int i = 0; i < manager.getStaff().length; i++) {
             staffComboBox.addItem(manager.getStaff()[i][0].toString()+" "+manager.getStaff()[i][1].toString());
@@ -57,8 +64,9 @@ public class ReserveBook extends javax.swing.JFrame {
         return ref.getText();
     }
 
-    public String getISBN() {
-        return isbn.getText();
+    public String getBookID() {
+        String book= titleComboBox.getSelectedItem().toString();
+        return manager.convertBookToID(book);
     }
 
     public String getMemberID() {
@@ -87,7 +95,6 @@ public class ReserveBook extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         ref = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        isbn = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -96,6 +103,7 @@ public class ReserveBook extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         staffComboBox = new javax.swing.JComboBox<>();
         memberComboBox = new javax.swing.JComboBox<>();
+        titleComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -107,7 +115,7 @@ public class ReserveBook extends javax.swing.JFrame {
 
         ref.setEnabled(false);
 
-        jLabel2.setText("ISBN");
+        jLabel2.setText("Title");
 
         jLabel3.setText("Member ID");
 
@@ -154,11 +162,11 @@ public class ReserveBook extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(isbn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addComponent(date, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(ref)
-                    .addComponent(staffComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(memberComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(staffComboBox, 0, 198, Short.MAX_VALUE)
+                    .addComponent(memberComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(titleComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(60, 60, 60))
             .addGroup(bookLayout.createSequentialGroup()
                 .addGap(122, 122, 122)
@@ -181,7 +189,7 @@ public class ReserveBook extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(isbn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(titleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -222,7 +230,7 @@ public class ReserveBook extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        manager.insertBookReserve(getRef(), getISBN(), getMemberID(), getStaffID(), getBookingDate());
+        manager.insertBookReserve(getRef(), getBookID(), getMemberID(), getStaffID(), getBookingDate());
         this.dispose();
         form.refreshTables();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -235,7 +243,6 @@ public class ReserveBook extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel book;
     private javax.swing.JTextField date;
-    private javax.swing.JTextField isbn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -246,5 +253,6 @@ public class ReserveBook extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> memberComboBox;
     private javax.swing.JTextField ref;
     private javax.swing.JComboBox<String> staffComboBox;
+    private javax.swing.JComboBox<String> titleComboBox;
     // End of variables declaration//GEN-END:variables
 }

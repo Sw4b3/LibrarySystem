@@ -26,7 +26,7 @@ CREATE TABLE `author` (
   `AuthorID` int(11) NOT NULL AUTO_INCREMENT,
   `AuthorName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`AuthorID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,7 +35,7 @@ CREATE TABLE `author` (
 
 LOCK TABLES `author` WRITE;
 /*!40000 ALTER TABLE `author` DISABLE KEYS */;
-INSERT INTO `author` VALUES (1,'JK Rowling');
+INSERT INTO `author` VALUES (1,'J.K. Rowling'),(2,'J.R.R Tolkien'),(3,'D. Brown');
 /*!40000 ALTER TABLE `author` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `book` (
 
 LOCK TABLES `book` WRITE;
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
-INSERT INTO `book` VALUES ('978-0545139700','Harry Potter and the Deathly Hallows',1,'2009','1',1,1,'5'),('978-0545139702','Lord of the Rings',1,'2008','3',1,1,'2'),('978-0545139745','The Da Vinci Code',1,'2003','2',1,1,'0');
+INSERT INTO `book` VALUES ('9780261102941','Lord of the Rings The Return of the King',2,'1992','3',2,4,'1'),('9780545010221','Harry Potter and the Deathly Hallows',1,'2009','1',2,3,'5'),('9780747532743','Harry Potter and the Philosopher\'s Stone',1,'2000','1',2,2,'5'),('9789054448105','The Da Vinci Code',3,'2005','2',1,1,'1');
 /*!40000 ALTER TABLE `book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,7 @@ CREATE TABLE `bookreserve` (
 
 LOCK TABLES `bookreserve` WRITE;
 /*!40000 ALTER TABLE `bookreserve` DISABLE KEYS */;
-INSERT INTO `bookreserve` VALUES ('#394-568','978-0545139745','1','AndrewSchwabe','2018-05-17','Not Returned');
+INSERT INTO `bookreserve` VALUES ('#280-264','9780261102941','1','AndrewSchwabe','2018-05-18','Not Returned'),('#971-750','9780261102941','1','AndrewSchwabe','2018-05-18','2018-05-18');
 /*!40000 ALTER TABLE `bookreserve` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -266,7 +266,7 @@ CREATE TABLE `publisher` (
   `PublisherID` int(11) NOT NULL AUTO_INCREMENT,
   `PublisherName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`PublisherID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,7 +275,7 @@ CREATE TABLE `publisher` (
 
 LOCK TABLES `publisher` WRITE;
 /*!40000 ALTER TABLE `publisher` DISABLE KEYS */;
-INSERT INTO `publisher` VALUES (1,'Pearson');
+INSERT INTO `publisher` VALUES (1,'Pearson Ltd'),(2,'Bloomsbury Pub Ltd'),(3,'Arthur A. Levine Books'),(4,'HarperCollins Canada');
 /*!40000 ALTER TABLE `publisher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -385,4 +385,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-17 20:11:38
+-- Dump completed on 2018-05-18 18:48:31

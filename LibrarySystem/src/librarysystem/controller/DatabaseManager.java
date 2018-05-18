@@ -222,11 +222,11 @@ public class DatabaseManager {
         return ID;
     }
 
-    public String convertBookToID(String fname, String lname) {
+    public String convertBookToID(String book) {
         String ID = "";
         try (Connection conn = DriverManager.getConnection(url, username, password); Statement s = conn.createStatement()) {
             Class.forName(driver).newInstance();
-            String query = "call convertBookToID('" + fname + "','" + lname + "');";
+            String query = "call convertBookToID('" + book + "');";
             ResultSet rs = s.executeQuery(query);
             int i = 0;
             while (rs.next()) {
@@ -236,7 +236,7 @@ public class DatabaseManager {
             rs.close();
             conn.close();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | SQLException ex) {
-            System.out.println("get customer method" + ex);
+            System.out.println("get book method" + ex);
         }
         return ID;
     }
@@ -392,7 +392,7 @@ public class DatabaseManager {
     public void restore() {
         try {
             String[] executeCmd = new String[]{".\\src\\database\\mysql.exe",
-                "--user=admin", "--password=admin", "librarydb",
+                "--user=root", "--password=''", "librarydb",
                 "-e", "source " + location};
 
             Process runtimeProcess = Runtime.getRuntime().exec(executeCmd);
